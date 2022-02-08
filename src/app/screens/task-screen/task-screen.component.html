@@ -1,62 +1,56 @@
-<div class="container border mt-4">
+<div class="container mt-4">
   <h2 class="bg-warning p-2 fw-bold text-center">Task Manager App</h2>
   <div class="row">
-    <div class="col-4 border border-warning">
+
+    <div class="col-md-4 col-sm-12">
       <div class="row position-relative">
-        <div class="col-7">
-          <h3 class="fw-bold">Task List</h3>
+        <div class="col-6">
+          <h3 class="fw-bold float-start">Task List</h3>
         </div>
-        <div class="col-5">
-          <button class="btn btn-success" type="button">New Task List</button>
+        <div class="col-6">
+          <button class="btn btn-success float-end" type="button" routerLink="/new-task-list">New Task List</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="list-group">
+            <a
+              [routerLink]="['/task-list', item._id]"
+              routerLinkActive="active"
+              class="list-group-item list-group-item-action"
+              aria-current="true"
+              *ngFor="let item of taskLists">
+              {{ item.title }}
+                <span (click)="deleteTaskList(item)" class="badge bg-danger rounded-pill">X</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8 col-sm-12">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="fw-bold float-start">Linked Tasks</h3>
+        </div>
+        <div class="col-6">
+          <button class="btn btn-success float-end" type="button" (click)="addNewTask()">New Task</button>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
           <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A list item
-              <span class="badge bg-danger rounded-pill">X</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A second list item
-              <span class="badge bg-danger rounded-pill">X</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A third list item
-              <span class="badge bg-danger rounded-pill">X</span>
+            <li [class.mark-completed] = "task.completed == true"
+              *ngFor="let task of tasks" (click)="taskClicked(task)"
+              class="list-group-item d-flex justify-content-between align-items-center"
+              style="cursor: pointer;">
+                {{ task.title }}
+                <span (click)="deleteTask(task)" class="badge bg-danger rounded-pill">X</span>
             </li>
           </ul>
         </div>
       </div>
     </div>
 
-    <div class="col-8 border border-warning">
-      <div class="row">
-        <div class="col-10">
-          <h3 class="fw-bold">Linked Tasks</h3>
-        </div>
-        <div class="col-2">
-          <button class="btn btn-success" type="button">New Task</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A list item
-              <span class="badge bg-danger rounded-pill">X</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A second list item
-              <span class="badge bg-danger rounded-pill">X</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              A third list item
-              <span class="badge bg-danger rounded-pill">X</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
